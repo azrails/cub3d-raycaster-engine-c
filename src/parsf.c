@@ -12,64 +12,31 @@
 
 #include "cub3d.h"
 
-static	void 	listdell(s_map **pars)
+static void ft_check(char *line, t_all *settings)
 {
-	s_map *tmp;
+    int i;
 
-	while(*pars)
-	{
-		tmp = *pars;
-		*pars = pars->next;
-		free(tmp);
-	}
+    i = 0;
+    if (line[1] == "R")
+    {
+        
+    }
+    if (line[1] == )
+    if (line[1] == )
+    if (line[1] == )
 }
 
-static 	void map_back(char *line, s_map **pars)
+void ft_init_conf(int fd, t_all *settings)
 {
-	s_map *tmp;
-	s_map *tmp2;
+    char *line;
+    int err = 0;
 
-	tmp2 = *pars;
-	if (!(tmp = malloc(sizeof(s_map))))
-	{
-		write(2,"ERROR: FAILURE\n",15);
-		exit(listdell(pars));
-	}
-	else
-		{
-			tmp->line = line;
-			tmp->next = NULL;
-		}
-	while(tmp2->next && tmp2)
-		tmp2 = tmp2->next;
-	tmp2 = tmp;
-	free(line);
-	line = NULL;
-}
-
-static	void 	parse_c(s_map **pars)
-{
-	int i;
-
-	i = 0;
-	while ()
-	if (ft_strchr())
-}
-
-void	ft_init_conf(int fd, s_map **pars)
-{
-	int check;
-	char *line;
-
-
-	check = 0;
-	line = NULL;
-	while((check = get_next_line(fd, &line)) > 0)
-		map_back(line, pars);
-	if (check == -1)
-	{
-		write(2,"ERROR: FAILURE\n",15);
-		exit(listdell(pars));
-	}
-	parse_c(pars);
+    while(err = (get_next_line(fd, &line) > 0))
+    {
+        ft_check(line,settings);
+        free(line);
+        line = NULL;        
+    }
+    if (err == -1)
+        errors(-3);
 }

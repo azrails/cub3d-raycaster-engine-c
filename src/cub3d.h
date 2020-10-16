@@ -16,24 +16,50 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <stdio.h>
-#include "../gnl/get_next_line.h"
-#include "../libft/libft.h"
+#include "./get_next_line.h"
 
-typedef	struct cub_conf
+#include <stdio.h>
+
+
+typedef	struct s_conf
 {
 	int		res[2];
 	int  	f[3];
 	int 	c[3];
-	unsigned char	*n;
-	unsigned char	*s;
-	unsigned char	*w;
-	unsigned char	*e;
-}c_conf;
+	 char	*n;
+	 char	*s;
+	 char	*w;
+	 char	*e;
+}t_conf;
 
 typedef struct s_map
 {
-	char *line;
-	struct s_map *next;
+	int count;
+	char **lines;
 }t_map;
+
+typedef struct s_all
+{
+	t_conf config;
+	t_map map;
+	int err;
+}t_all;
+
+int ft_skiptrash(char *line, int i);
+int ft_ischar(char c);
+void ft_check(char *line, t_all *settings);
+void ft_init_conf(int fd, t_all *settings);
+int ft_isnum(char c);
+void ft_init(int fd, t_all *settings);
+int ft_check_name(char *path ,char *name);
+int   ft_pathLen(char *line, int i);
+char *ft_calloc(int size, int len);
+void errors(int er);
+int ft_clear(t_all *settings);
+int ft_resolution(char *line, t_all *settings, int i);
+int ft_pars_map(char *line, t_all *settings );
+int ft_check_map(t_all *settings);
+int ft_textures(char *line, char *path , int i);
+int ft_area(char c ,char *line, t_all *settings, int i);
 
 #endif

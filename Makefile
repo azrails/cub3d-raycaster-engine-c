@@ -14,7 +14,24 @@
 
 NAME = cub3D
 
-SRC =  /src/main.c
+SRC =  src/main.c \
+		src/map.c \
+		src/tool.c \
+		src/textures.c \
+		src/resolution.c \
+		src/parsf.c \
+		src/errors.c \
+		src/get_next_line.c \
+		src/get_next_line_utils.c
+OBJ = main.o \
+		map.o \
+		tool.o \
+		textures.o \
+		resolution.o \
+		parsf.o \
+		errors.o \
+		get_next_line.o \
+		get_next_line_utils.o
 
 O = $(SRC:.c=.o)
 
@@ -23,12 +40,12 @@ FLAG = -Wall -Wextra -Werror -I. -c
 all: $(NAME)
 
 %.o: %.c
-	gcc $(FLAG) $< 
+	gcc  $(FLAG) $<
 
 $(NAME):$(O)
-		
+		gcc -o $(NAME) $(OBJ)
 clean:
-		rm -f $(O)
+		rm -f $(OBJ)
 
 fclean: clean
 		rm -f $(NAME)

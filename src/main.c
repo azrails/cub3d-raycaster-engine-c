@@ -12,14 +12,6 @@
 
 #include "cub3d.h"
 
-int 	ft_strlen(char *str)
-{
-	int i = 0;
-	while(str[i] != '\0')
-		i++;
-	return (i);
-}
-
 static int		equal(char *s1, char *s2)
 {
 	int i;
@@ -61,13 +53,18 @@ int		main(int argc , char **argv)
 	int fd;
 	t_all settings;
 
+	settings.err = 0;
 	if (argc == 2 || argc == 3)
 	{
 		if (error_arg(argc, argv) == 0)
 		{
 			if((fd = open(argv[1] ,O_RDONLY)) < 0)
-				errors(-2);
-			ft_init_conf(fd, &settings);
+				errors(-3);
+			if (argc == 2)
+				ft_init(fd, &settings);
+			else if (argc == 3)
+				ft_init(fd, &settings);
+			close(fd);
 		}
 		else
 			return (-1);

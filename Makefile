@@ -18,20 +18,22 @@ SRC =  src/main.c \
 		src/map.c \
 		src/tool.c \
 		src/textures.c \
-		src/resolution.c \
 		src/parsf.c \
 		src/errors.c \
 		src/get_next_line.c \
-		src/get_next_line_utils.c
+		src/get_next_line_utils.c \
+		src/check_pars.c \
+		src/check_map.c
 OBJ = main.o \
 		map.o \
 		tool.o \
 		textures.o \
-		resolution.o \
 		parsf.o \
 		errors.o \
 		get_next_line.o \
-		get_next_line_utils.o
+		get_next_line_utils.o \
+		check_pars.o \
+		check_map.o
 
 O = $(SRC:.c=.o)
 

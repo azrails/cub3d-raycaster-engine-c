@@ -20,11 +20,10 @@ void ft_init(int fd, t_all *settings)
     settings->config.e = NULL;
     settings->map.count = 0;
     settings->map.lines = NULL;
+    settings->position.x = 0;
+    settings->position.y = 0;
     ft_init_conf(fd, settings);
-    if((settings->err = ft_check_map(settings)) < 0)
-        errors(ft_clear(settings));
-    int i =0;
-    while(settings->map.lines[i])
+    ft_check_pars(settings);
     //if (flag == 1)
 }
 void ft_check(char *line, t_all *settings)
@@ -70,6 +69,9 @@ void ft_check(char *line, t_all *settings)
         free(line);
         line = NULL;
     }
+    ft_check(line,settings);
+    free(line);
+    line = NULL;
     if (err == -1)
         errors(-3);
 }

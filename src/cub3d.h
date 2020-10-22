@@ -38,14 +38,33 @@ typedef struct s_map
 	char **lines;
 }t_map;
 
+typedef struct s_pos
+{
+	int x;
+	int y;
+}t_pos;
+
+typedef struct s_check
+{
+	int c;
+	int fo1;
+	int lo1;
+	int fo2;
+	int lo2;
+}t_check;
+
 typedef struct s_all
 {
 	t_conf config;
 	t_map map;
 	int err;
+	t_pos position;
+	t_check check;
 }t_all;
 
 int ft_skiptrash(char *line, int i);
+int   ft_check_lines(t_all *settings);
+void ft_check_pars(t_all *settings);
 int ft_ischar(char c);
 void ft_check(char *line, t_all *settings);
 void ft_init_conf(int fd, t_all *settings);

@@ -1,11 +1,5 @@
 #include"cub3d.h"
 
-int ft_check_map(t_all *settings)
-{
-    settings->err = -3;
-    return(0);
-}
-
 int ft_resolution(char *line, t_all *settings, int i)
 {
     int nbr;

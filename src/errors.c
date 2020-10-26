@@ -29,6 +29,14 @@ int ft_clear(t_all *settings)
 
 void errors(int er)
 {
+    if (er == -8)
+        write(1,"ERROR: invalid texture path\n", 28);
+    if (er == -7)
+        write(1,"ERROR: in open textures\n", 24);
+    if (er == -6)
+        write(1,"ERROR:malloc is dead\n", 21);
+    if (er == -5)
+        write(1,"ERROR:raycaster will be strong\n", 32);
     if (er == -5)
         write(1,"ERROR: wrong map\n", 17);
     if (er == -4)

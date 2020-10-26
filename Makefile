@@ -10,9 +10,11 @@
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
 
 NAME = cub3D
+
+MLX = mlx
 
 SRC =  src/main.c \
 		src/map.c \
@@ -23,7 +25,11 @@ SRC =  src/main.c \
 		src/get_next_line.c \
 		src/get_next_line_utils.c \
 		src/check_pars.c \
-		src/check_map.c
+		src/check_map.c \
+		src/pimg.c\
+		src/sprites.c\
+		src/ptextures.c
+
 OBJ = main.o \
 		map.o \
 		tool.o \
@@ -33,11 +39,16 @@ OBJ = main.o \
 		get_next_line.o \
 		get_next_line_utils.o \
 		check_pars.o \
-		check_map.o
+		check_map.o \
+		pimg.o\
+		sprites.o\
+		ptextures.o
 
 O = $(SRC:.c=.o)
 
 FLAG = -Wall -Wextra -Werror -I. -c
+
+MLXFLAG = -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
 
@@ -45,7 +56,7 @@ all: $(NAME)
 	gcc  $(FLAG) $<
 
 $(NAME):$(O)
-		gcc -o $(NAME) $(OBJ)
+		gcc -o $(NAME) -L $(MLX) $(MLXFLAG) $(OBJ)
 clean:
 		rm -f $(OBJ)
 

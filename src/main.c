@@ -64,7 +64,6 @@ int		main(int argc , char **argv)
 				ft_init(fd, &settings);
 			else if (argc == 3)
 				ft_init(fd, &settings);
-			close(fd);
 		}
 		else
 			return (-1);

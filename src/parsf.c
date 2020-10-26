@@ -12,6 +12,16 @@
 
 #include "cub3d.h"
 
+static int start_draw(t_all *settings)
+{
+    if(!(settings->w.ptr = mlx_new_window(settings->ptr, 
+            settings->config.res[0], settings->config.res[1], "Cub3D")))
+        return(-3);
+    if (ft_img(settings) < 0)
+        return(-3);
+    return(0);
+}
+
 void ft_init(int fd, t_all *settings)
 {
     settings->config.n = NULL;
@@ -23,7 +33,15 @@ void ft_init(int fd, t_all *settings)
     settings->position.x = 0;
     settings->position.y = 0;
     ft_init_conf(fd, settings);
+    if(!(settings->ptr = mlx_init()))
+    {
+        settings->err = -3;
+        errors(ft_clear(settings));
+    }
     ft_check_pars(settings);
+    if((settings->err = start_draw(settings)) < 0)//clear settings->w.ptr and some pointers
+        errors(ft_clear(settings));
+    mlx_loop(settings->ptr);
     //if (flag == 1)
 }
 void ft_check(char *line, t_all *settings)
@@ -35,13 +53,13 @@ void ft_check(char *line, t_all *settings)
     if (line[i] == 'R')
        settings->err = ft_resolution(line,settings,i + 1);
     if (line[i] ==  'N' && line[i + 1] == 'O' && line[i + 2] == ' ')
-        settings->err = ft_textures(line,settings->config.n, i + 2);
+        settings->config.n = ft_textures(settings, line, i + 2);
     if (line[i] ==  'S' && line[i + 1] == 'O' && line[i + 2] == ' ')
-        settings->err = ft_textures(line,settings->config.s, i + 2);
+        settings->config.s = ft_textures(settings, line, i + 2);
     if (line[i] ==  'W' && line[i + 1] == 'E' && line[i + 2] == ' ')
-        settings->err = ft_textures(line,settings->config.w, i + 2);
+        settings->config.w = ft_textures(settings, line, i + 2);
     if (line[i] ==  'E' && line[i + 1] == 'A' && line[i + 2] == ' ')
-        settings->err = ft_textures(line,settings->config.e, i + 2);
+        settings->config.e = ft_textures(settings, line, i + 2);
     if ((line[i] == 'F') && line[i + 1] == ' ')
         ft_area('F' ,line,settings, ++i);
     if ((line[i] == 'C') && line[i + 1] == ' ')
@@ -72,6 +90,7 @@ void ft_check(char *line, t_all *settings)
     ft_check(line,settings);
     free(line);
     line = NULL;
+    close(fd);
     if (err == -1)
         errors(-3);
 }

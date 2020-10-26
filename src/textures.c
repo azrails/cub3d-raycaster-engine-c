@@ -6,17 +6,18 @@ int ft_isnum(char c)
     return(c <= '9' && c >= '0');
 }
 
-int ft_textures(char *line, char *path , int i)
+char *ft_textures(t_all *settings, char *line, int i)
 {
     int end;
     int k;
     int fd;
+    char *path;
 
     k = 0;
     i = ft_skiptrash(line , i);
     end = ft_pathLen(line, i);
     if (!(path = ft_calloc(sizeof(char) , (end - i + 1))))
-        return(-3);
+        return(NULL);
     while(i <= end)
     {
         path[k] = line[i];
@@ -24,11 +25,14 @@ int ft_textures(char *line, char *path , int i)
         k++;
     }
     if((ft_check_name(path,".xpm")) < 0)
-        return (-1);
+        return (NULL);
     if ((fd = open(path, O_RDONLY)) <= 0)
-        return (-1);
+    {
+        settings->err = -8;
+        return (NULL);
+    }
     close(fd);
-    return (0);
+    return (path);
 }
 
 int ft_area(char c ,char *line, t_all *settings, int i)

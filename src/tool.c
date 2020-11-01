@@ -38,7 +38,7 @@ int   ft_pathLen(char *line, int i)
 {
     while (line[i] && line[i] != ' ')
         i++;
-    return (i);
+    return (i - 1);
 }
 char *ft_calloc(int size, int len)
 {

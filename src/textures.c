@@ -51,6 +51,8 @@ int ft_area(char c ,char *line, t_all *settings, int i)
             nbr += line[i] - '0';
             i++;
         }
+        if (nbr > 255 || nbr < 0)
+            nbr = 0;
         if(c == 'F')
             settings->config.f[count] = nbr;
         else if (c == 'C')

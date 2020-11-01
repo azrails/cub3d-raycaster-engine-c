@@ -79,6 +79,7 @@ typedef struct s_beam
 	int pmx;
 	int pmy;
 	int side;
+	double *psp;
 	double ray_x;
 	double ray_y;
 	double side_distx;
@@ -88,11 +89,6 @@ typedef struct s_beam
 	double pwd;
 	double camera;
 }t_beam;
-
-typedef struct s_s
-{
-	int c;
-}t_sprite;
 
 typedef struct s_draw
 {
@@ -125,14 +121,77 @@ typedef struct s_image
 	char *aptr;
 }t_image;
 
+typedef struct s_key
+{
+	int mu;
+	int md;
+	int ml;
+	int mr;
+	int ll;
+	int lr;
+}t_key;
+
+typedef struct s_sprite
+{
+	int x;
+	int y;
+	struct s_sprite *next;
+}t_sprite;
+
+typedef struct s_tbspt
+{
+	int x;
+	int y;
+}t_tbs;
+
+typedef struct s_draw_sprite
+{
+	int i;
+	int k;
+	int j;
+	int y;
+	int color;
+	int count;
+	int ssx;
+	int h;
+	int w;
+	int dsx;
+	int dex;
+	int dsy;
+	int dey;
+	int tsx;
+	int tsy;
+	double sx;
+	double sy;
+	double dt;
+	double tx;
+	double ty;
+	t_tbs *tsp;
+}t_ds;
+
+typedef struct s_psp
+{
+	int hg;
+	int wd;
+	int sl;
+	int bp;
+	int end;
+	void *iptr;
+	char *aptr;
+}t_psp;
+
 typedef struct s_all
 {
 	int err;
+	int bmp;
 	void *ptr;
+	t_psp *psp;
+	t_ds *ds;
+	t_key key;
 	t_image **img;
 	t_colums col;
 	t_draw dr;
-	t_sprite spt;
+	t_sprite *spt;
 	t_w w;
 	t_d d;
 	t_beam bm;
@@ -142,8 +201,23 @@ typedef struct s_all
 	t_check check;
 }t_all;
 
+int ft_destr(void *param);
+int ft_checkspt(t_all *settings);
+void ft_bmp(t_all *settings);
+void ft_ppx(t_all *settings);
+void ft_pxp(t_all *settings);
+void ft_op(t_all *settings, char *tmp, t_psp *psp);
+int ft_opstp(t_all *settings, char *line, int i);
+void ft_ssp(t_all *settings);
+int ft_loop(void *par);
+int ft_dspt(t_all *settings);
+void ft_pcl(t_all *settings, int cf);
+int ft_key(int key, void *par);
+int ft_upkey(int key, void *par);
+void start_draw(t_all *settings);
 void ft_ptextures(t_all *settings);
-void ft_sprite(t_all *settings);
+int ft_key_pressed(t_all *settings);
+int ft_sprite(t_all *settings);
 int ft_skiptrash(char *line, int i);
 int   ft_check_lines(t_all *settings);
 void ft_check_pars(t_all *settings);
@@ -151,7 +225,7 @@ int ft_ischar(char c);
 void ft_check(char *line, t_all *settings);
 void ft_init_conf(int fd, t_all *settings);
 int ft_isnum(char c);
-void ft_init(int fd, t_all *settings);
+void ft_init(int fd, t_all *settings, int f);
 int ft_check_name(char *path ,char *name);
 int   ft_pathLen(char *line, int i);
 char *ft_calloc(int size, int len);

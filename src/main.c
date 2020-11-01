@@ -12,6 +12,17 @@
 
 #include "cub3d.h"
 
+int ft_loop(void *par)
+{
+	t_all *settings;
+
+	settings = (t_all *)par;
+	start_draw(settings);
+	ft_key_pressed(settings);
+	return (0);
+
+}
+
 static int		equal(char *s1, char *s2)
 {
 	int i;
@@ -61,9 +72,9 @@ int		main(int argc , char **argv)
 			if((fd = open(argv[1] ,O_RDONLY)) < 0)
 				errors(-3);
 			if (argc == 2)
-				ft_init(fd, &settings);
+				ft_init(fd, &settings, 0);
 			else if (argc == 3)
-				ft_init(fd, &settings);
+				ft_init(fd, &settings,1);
 		}
 		else
 			return (-1);

@@ -12,6 +12,35 @@
 
 #include "cub3d.h"
 
+int ft_destr(void *param)
+{
+    t_all *settings;
+
+    settings = (t_all *)param;
+    errors(ft_clear(settings));
+    return (1);
+}
+void ft_op(t_all *settings, char *tmp, t_psp *psp)
+{
+    int fd;
+
+    if((ft_check_name(tmp ,".xpm")) < 0)
+        settings->err = -7;
+    if ((fd = open(tmp, O_RDONLY)) <= 0)
+        settings->err = -8;
+    if (settings->err < 0)
+        errors(ft_clear(settings));
+    close(fd);
+    psp->sl = 2;
+    if (!(psp->iptr = mlx_xpm_file_to_image(settings->ptr, tmp, &psp->wd, &psp->hg)))
+    {
+        settings->err = -7;
+        errors(ft_clear(settings));
+    }
+    psp->aptr = mlx_get_data_addr(psp->iptr, &psp->bp, &psp->sl, &psp->end);
+    settings->psp = psp;
+}
+
 int ft_clear(t_all *settings)
 {
     if (settings->config.e)
@@ -29,6 +58,8 @@ int ft_clear(t_all *settings)
 
 void errors(int er)
 {
+    if (er == -9)
+        write(1,"ERROR: invalid resolution\n", 26);
     if (er == -8)
         write(1,"ERROR: invalid texture path\n", 28);
     if (er == -7)
@@ -48,5 +79,5 @@ void errors(int er)
     if (er == -1)
         write(2,"ERROR: invalid input\n",21);
 
-    exit(-1);
+    exit(0);
 }

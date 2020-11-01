@@ -28,7 +28,12 @@ SRC =  src/main.c \
 		src/check_map.c \
 		src/pimg.c\
 		src/sprites.c\
-		src/ptextures.c
+		src/ptextures.c\
+		src/key_move.c\
+		src/keyp.c\
+		src/sprite.c\
+		src/sprite2.c\
+		src/bmp.c
 
 OBJ = main.o \
 		map.o \
@@ -42,7 +47,12 @@ OBJ = main.o \
 		check_map.o \
 		pimg.o\
 		sprites.o\
-		ptextures.o
+		ptextures.o \
+		key_move.o \
+		keyp.o \
+		sprite.o \
+		sprite2.o \
+		bmp.o
 
 O = $(SRC:.c=.o)
 

@@ -188,15 +188,15 @@ static int checker(t_all *settings, int i, int j)
         || settings->map.lines[i][j] == 'W' || settings->map.lines[i][j] == 'E')
     {
          if (!(tr(settings,i,j - 1)) || !(tr(settings,i,j + 1)))
-            return (0);
+              return (0);
         y = ft_strlen(settings->map.lines[i + 1]);
         if( j < y && (!(tr(settings,i + 1,j - 1)) || !(tr(settings,i + 1,j + 1)) 
             || !(tr(settings,i + 1, j))))
-            return (0);
+              return (0);
         y = ft_strlen(settings->map.lines[i - 1]);
         if( j < y && (!(tr(settings,i - 1,j - 1)) || !(tr(settings,i - 1,j + 1)) 
             || !(tr(settings,i - 1, j))))
-            return (0);
+              return (0);
     }
     return (1);
 }

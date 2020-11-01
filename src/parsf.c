@@ -12,18 +12,29 @@
 
 #include "cub3d.h"
 
-static int start_draw(t_all *settings)
+ void start_draw(t_all *settings)
 {
-    if(!(settings->w.ptr = mlx_new_window(settings->ptr, 
-            settings->config.res[0], settings->config.res[1], "Cub3D")))
-        return(-3);
     if (ft_img(settings) < 0)
-        return(-3);
-    return(0);
+        {
+        settings->err = -3;
+        errors(ft_clear(settings));
+    }
 }
 
-void ft_init(int fd, t_all *settings)
+void ft_init(int fd, t_all *settings, int f)
 {
+    settings->ptr = NULL;
+    settings->w.ptr = NULL;
+    settings->w.adr = NULL;
+    settings->w.iptr = NULL;
+    settings->ds = NULL;
+    settings->psp = NULL;
+    settings->key.mu = 0;
+    settings->key.mr = 0;
+    settings->key.ml = 0;
+    settings->key.md = 0;
+    settings->config.res[0] = 0;
+    settings->config.res[1] = 0;
     settings->config.n = NULL;
     settings->config.w = NULL;
     settings->config.s = NULL;
@@ -32,17 +43,27 @@ void ft_init(int fd, t_all *settings)
     settings->map.lines = NULL;
     settings->position.x = 0;
     settings->position.y = 0;
-    ft_init_conf(fd, settings);
+    settings->spt = NULL;
+    settings->bmp = f;
     if(!(settings->ptr = mlx_init()))
     {
         settings->err = -3;
         errors(ft_clear(settings));
     }
+    ft_init_conf(fd, settings);
     ft_check_pars(settings);
-    if((settings->err = start_draw(settings)) < 0)//clear settings->w.ptr and some pointers
+    if(!(settings->w.ptr = mlx_new_window(settings->ptr, 
+            settings->config.res[0], settings->config.res[1], "Cub3D")))
+    {
+        settings->err = -5;
         errors(ft_clear(settings));
+    }//clear settings->w.ptr and some pointers
+    settings->position.x +=1;
+    mlx_hook(settings->w.ptr, 2, 0, &ft_key ,settings);
+    mlx_hook(settings->w.ptr, 3, 0, &ft_upkey ,settings);
+    mlx_hook(settings->w.ptr, 17, 1L << 17, &ft_destr ,settings);
+    mlx_loop_hook(settings->ptr, &ft_loop, settings);
     mlx_loop(settings->ptr);
-    //if (flag == 1)
 }
 void ft_check(char *line, t_all *settings)
 {
@@ -50,8 +71,10 @@ void ft_check(char *line, t_all *settings)
 
     i = 0;
     i = ft_skiptrash(line, i);
-    if (line[i] == 'R')
+    if (line[i] == 'R' && line[i + 1] == ' ')
        settings->err = ft_resolution(line,settings,i + 1);
+    if (line[i] == 'S' && line[i + 1] == ' ')
+        settings->err = ft_opstp(settings, line, i + 1);
     if (line[i] ==  'N' && line[i + 1] == 'O' && line[i + 2] == ' ')
         settings->config.n = ft_textures(settings, line, i + 2);
     if (line[i] ==  'S' && line[i + 1] == 'O' && line[i + 2] == ' ')

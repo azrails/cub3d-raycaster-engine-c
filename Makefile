@@ -26,53 +26,35 @@ SRC =  src/main.c \
 		src/get_next_line_utils.c \
 		src/check_pars.c \
 		src/check_map.c \
-		src/pimg.c\
-		src/sprites.c\
-		src/ptextures.c\
-		src/key_move.c\
-		src/keyp.c\
-		src/sprite.c\
-		src/sprite2.c\
-		src/bmp.c\
+		src/pimg.c \
+		src/sprites.c \
+		src/ptextures.c \
+		src/key_move.c \
+		src/keyp.c \
+		src/sprite.c \
+		src/sprite2.c \
+		src/bmp.c \
 		src/otext.c
-
-OBJ = main.o \
-		map.o \
-		tool.o \
-		textures.o \
-		parsf.o \
-		errors.o \
-		get_next_line.o \
-		get_next_line_utils.o \
-		check_pars.o \
-		check_map.o \
-		pimg.o\
-		sprites.o\
-		ptextures.o \
-		key_move.o \
-		keyp.o \
-		sprite.o \
-		sprite2.o \
-		bmp.o\
-		otext.o
 
 O = $(SRC:.c=.o)
 
-FLAG = -Wall -Wextra -Werror -I. -c
+FLAG =  -Wall -Wextra -Werror
 
 MLXFLAG = -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
 
 %.o: %.c
-	gcc  $(FLAG) $<
+	gcc  $(FLAG) -c $< -o $@
 
 $(NAME):$(O)
-		gcc -o $(NAME) -L $(MLX) $(MLXFLAG) $(OBJ)
+		make -C mlx
+		gcc -o $(NAME) -L $(MLX) $(MLXFLAG) $(O)
 clean:
-		rm -f $(OBJ)
+		rm -f $(O)
 
 fclean: clean
+		make -C mlx clean
 		rm -f $(NAME)
 
 re: fclean all

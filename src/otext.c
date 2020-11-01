@@ -12,6 +12,26 @@
 
 #include "cub3d.h"
 
+void			ft_val(int fd, t_all *settings)
+{
+	settings->val.txt = 0;
+	settings->val.s = 0;
+	settings->val.res = 0;
+	settings->val.cf = 0;
+	ft_init_conf(fd, settings);
+	if (settings->val.s > 1 || settings->val.txt > 4 || settings->val.res > 1
+	|| settings->val.cf > 2)
+	{
+		settings->err = -1;
+		errors(ft_clear(settings));
+	}
+	if (settings->val.cf == 0 || settings->val.cf == 1)
+	{
+		settings->err = -9;
+		errors(ft_clear(settings));
+	}
+}
+
 int				ft_opstp(t_all *settings, char *line, int i)
 {
 	int		end;
@@ -33,6 +53,7 @@ int				ft_opstp(t_all *settings, char *line, int i)
 		k++;
 	}
 	ft_op(settings, tmp, psp);
+	settings->val.s++;
 	free(tmp);
 	return (0);
 }

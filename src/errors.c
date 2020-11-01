@@ -12,6 +12,18 @@
 
 #include "cub3d.h"
 
+void	texture(t_all *settings, int i, char *line)
+{
+	if (line[i] == 'N' && line[i + 1] == 'O' && line[i + 2] == ' ')
+		settings->config.n = ft_textures(settings, line, i + 2);
+	if (line[i] == 'S' && line[i + 1] == 'O' && line[i + 2] == ' ')
+		settings->config.s = ft_textures(settings, line, i + 2);
+	if (line[i] == 'W' && line[i + 1] == 'E' && line[i + 2] == ' ')
+		settings->config.w = ft_textures(settings, line, i + 2);
+	if (line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' ')
+		settings->config.e = ft_textures(settings, line, i + 2);
+}
+
 int		ft_destr(void *param)
 {
 	t_all *settings;

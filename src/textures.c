@@ -70,5 +70,6 @@ int		ft_area(char c, char *line, t_all *settings, int i)
 			settings->config.c[count] = nbr;
 		count++;
 	}
+	settings->val.cf++;
 	return (0);
 }

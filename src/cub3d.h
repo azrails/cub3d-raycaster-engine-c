@@ -177,11 +177,20 @@ typedef	struct			s_psp
 	char				*aptr;
 }						t_psp;
 
+typedef	struct			s_val
+{
+	int					txt;
+	int					s;
+	int					res;
+	int					cf;
+}						t_val;
+
 typedef	struct			s_all
 {
 	int					err;
 	int					bmp;
 	void				*ptr;
+	t_val				val;
 	t_psp				*psp;
 	t_ds				*ds;
 	t_key				key;
@@ -198,6 +207,8 @@ typedef	struct			s_all
 	t_check				check;
 }						t_all;
 
+void					texture(t_all *settings, int i, char *line);
+void					ft_val(int fd, t_all *settings);
 int						ft_in(t_all *settings);
 int						ft_op_textures(t_all *settings);
 int						ft_destr(void *param);

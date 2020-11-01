@@ -35,6 +35,7 @@ int	ft_resolution(char *line, t_all *settings, int i)
 		settings->config.res[0] = 1920;
 	if (settings->config.res[1] > 1080)
 		settings->config.res[1] = 1080;
+	settings->val.res++;
 	return (0);
 }
 

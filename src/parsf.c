@@ -28,7 +28,7 @@ static	void	ft_start(int fd, t_all *settings)
 		settings->err = -3;
 		errors(ft_clear(settings));
 	}
-	ft_init_conf(fd, settings);
+	ft_val(fd, settings);
 	ft_check_pars(settings);
 	if (!(settings->w.ptr = mlx_new_window(settings->ptr,
 			settings->config.res[0], settings->config.res[1], "Cub3D")))
@@ -82,14 +82,14 @@ int				ft_check(char *line, t_all *settings)
 		settings->err = ft_resolution(line, settings, i + 1);
 	if (line[i] == 'S' && line[i + 1] == ' ')
 		settings->err = ft_opstp(settings, line, i + 1);
-	if (line[i] == 'N' && line[i + 1] == 'O' && line[i + 2] == ' ')
-		settings->config.n = ft_textures(settings, line, i + 2);
-	if (line[i] == 'S' && line[i + 1] == 'O' && line[i + 2] == ' ')
-		settings->config.s = ft_textures(settings, line, i + 2);
-	if (line[i] == 'W' && line[i + 1] == 'E' && line[i + 2] == ' ')
-		settings->config.w = ft_textures(settings, line, i + 2);
-	if (line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' ')
-		settings->config.e = ft_textures(settings, line, i + 2);
+	if ((line[i] == 'N' && line[i + 1] == 'O' && line[i + 2] == ' ') ||
+	(line[i] == 'S' && line[i + 1] == 'O' && line[i + 2] == ' ') ||
+	(line[i] == 'W' && line[i + 1] == 'E' && line[i + 2] == ' ') ||
+	(line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' '))
+	{
+		texture(settings, i, line);
+		settings->val.txt++;
+	}
 	if ((line[i] == 'F') && line[i + 1] == ' ')
 		ft_area('F', line, settings, ++i);
 	if ((line[i] == 'C') && line[i + 1] == ' ')

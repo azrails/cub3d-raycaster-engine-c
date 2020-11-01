@@ -6,7 +6,7 @@
 /*   By: wsallei <wsallei@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 10:35:46 by wsallei           #+#    #+#             */
-/*   Updated: 2020/11/01 10:35:48 by wsallei          ###   ########.fr       */
+/*   Updated: 2020/11/01 13:44:17 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int					ft_img(t_all *settings)
 
 	i = 0;
 	settings->bm.i = 0;
-	if ((settings->err = ft_in(settings) < 0)
+	if ((settings->err = ft_in(settings)) < 0)
 		errors(ft_clear(settings));
 	while (i < settings->config.res[0])
 	{

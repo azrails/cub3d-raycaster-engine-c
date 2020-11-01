@@ -37,7 +37,7 @@ int				ft_opstp(t_all *settings, char *line, int i)
 	return (0);
 }
 
-int		ft_in(t_all *settings)
+int				ft_in(t_all *settings)
 {
 	if (!(settings->w.iptr = mlx_new_image(settings->ptr,
 	settings->config.res[0], settings->config.res[1])))
@@ -50,7 +50,7 @@ int		ft_in(t_all *settings)
 	return (0);
 }
 
-static	void	opt(t_all *settings)
+static	int		opt(t_all *settings)
 {
 	if (!(settings->img[0]->iptr = mlx_xpm_file_to_image(settings->ptr,
 	settings->config.n, &settings->img[0]->wd, &settings->img[0]->hg)))
@@ -72,6 +72,7 @@ static	void	opt(t_all *settings)
 		return (-7);
 	settings->img[3]->aptr = mlx_get_data_addr(settings->img[3]->iptr,
 	&settings->img[3]->bp, &settings->img[3]->sl, &settings->img[3]->end);
+	return (0);
 }
 
 int				ft_op_textures(t_all *settings)
@@ -94,6 +95,7 @@ int				ft_op_textures(t_all *settings)
 		settings->img[i]->hg = 0;
 		i++;
 	}
-	opt(settings);
+	if((settings->err = opt(settings)) < 0)
+		errors(ft_clear(settings));
 	return (0);
 }

@@ -33,7 +33,8 @@ SRC =  src/main.c \
 		src/keyp.c\
 		src/sprite.c\
 		src/sprite2.c\
-		src/bmp.c
+		src/bmp.c\
+		src/otext.c
 
 OBJ = main.o \
 		map.o \
@@ -52,7 +53,8 @@ OBJ = main.o \
 		keyp.o \
 		sprite.o \
 		sprite2.o \
-		bmp.o
+		bmp.o\
+		otext.o
 
 O = $(SRC:.c=.o)
 

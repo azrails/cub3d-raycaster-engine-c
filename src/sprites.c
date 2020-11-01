@@ -12,9 +12,9 @@
 
 #include "cub3d.h"
 
-static	int		calc(t_all *settings, int i)
+static	double	calc(t_all *settings, int i)
 {
-	int ds;
+	double ds;
 
 	ds = 0;
 	ds = ((settings->position.x - settings->ds->tsp[i].x) *

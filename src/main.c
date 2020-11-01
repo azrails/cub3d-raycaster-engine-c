@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wsallei <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: wsallei <wsallei@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/20 13:39:51 by wsallei           #+#    #+#             */
-/*   Updated: 2020/08/20 13:40:01 by wsallei          ###   ########.fr       */
+/*   Created: 2020/11/01 10:33:10 by wsallei           #+#    #+#             */
+/*   Updated: 2020/11/01 10:33:12 by wsallei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int ft_loop(void *par)
+int				ft_loop(void *par)
 {
 	t_all *settings;
 
@@ -20,10 +20,9 @@ int ft_loop(void *par)
 	start_draw(settings);
 	ft_key_pressed(settings);
 	return (0);
-
 }
 
-static int		equal(char *s1, char *s2)
+static	int		equal(char *s1, char *s2)
 {
 	int i;
 
@@ -37,44 +36,44 @@ static int		equal(char *s1, char *s2)
 	return (0);
 }
 
-static int		error_arg(int argc, char **argv)
+static	int		error_arg(int argc, char **argv)
 {
 	int i;
 
 	i = ft_strlen(argv[1]);
-	if (argv[1][i - 1] != 'b' && argv[1][i - 2] != 'u' && argv[1][i - 3] != 'c' 
+	if (argv[1][i - 1] != 'b' && argv[1][i - 2] != 'u' && argv[1][i - 3] != 'c'
 			&& argv[1][i - 4] != '.')
 	{
 		if (equal(argv[1], "--save") == 0)
 			errors(-4);
 		else
-			write(2,"ERROR: wrong file format\n", 25);
-		return(-1);
+			write(2, "ERROR: wrong file format\n", 25);
+		return (-1);
 	}
 	if (argc == 3 && equal(argv[2], "--save") != 0)
-		{
-			write(2,"ERROR: invalid flag\n", 20);
-			return (-1);
-		}
+	{
+		write(2, "ERROR: invalid flag\n", 20);
+		return (-1);
+	}
 	return (0);
 }
 
-int		main(int argc , char **argv)
+int				main(int argc, char **argv)
 {
-	int fd;
-	t_all settings;
+	int		fd;
+	t_all	settings;
 
 	settings.err = 0;
 	if (argc == 2 || argc == 3)
 	{
 		if (error_arg(argc, argv) == 0)
 		{
-			if((fd = open(argv[1] ,O_RDONLY)) < 0)
+			if ((fd = open(argv[1], O_RDONLY)) < 0)
 				errors(-3);
 			if (argc == 2)
 				ft_init(fd, &settings, 0);
 			else if (argc == 3)
-				ft_init(fd, &settings,1);
+				ft_init(fd, &settings, 1);
 		}
 		else
 			return (-1);

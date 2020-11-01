@@ -124,6 +124,7 @@ int					ft_dspt(t_all *settings)
 		ft_psprite(settings);
 		settings->ds->i++;
 	}
+	free(settings->ds->tsp);
 	free(settings->ds);
 	free(settings->bm.psp);
 	settings->ds = NULL;

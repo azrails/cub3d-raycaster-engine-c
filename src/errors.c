@@ -45,6 +45,8 @@ void	ft_op(t_all *settings, char *tmp, t_psp *psp)
 
 int		ft_clear(t_all *settings)
 {
+	if (settings->w.ptr != NULL)
+		mlx_destroy_window(settings->ptr, settings->w.ptr);
 	if (settings->img != NULL)
 		free(settings->img);
 	if (settings->config.e)

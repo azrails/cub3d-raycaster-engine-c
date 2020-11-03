@@ -30,17 +30,23 @@ static	void	ft_start(int fd, t_all *settings)
 	}
 	ft_val(fd, settings);
 	ft_check_pars(settings);
-	if (!(settings->w.ptr = mlx_new_window(settings->ptr,
-			settings->config.res[0], settings->config.res[1], "Cub3D")))
+	if (settings->bmp == 0)
 	{
-		settings->err = -5;
-		errors(ft_clear(settings));
+		if (!(settings->w.ptr = mlx_new_window(settings->ptr,
+				settings->config.res[0], settings->config.res[1], "Cub3D")))
+		{
+			settings->err = -5;
+			errors(ft_clear(settings));
+		}
 	}
 	settings->position.x += 1;
-	mlx_hook(settings->w.ptr, 2, 0, &ft_key, settings);
-	mlx_hook(settings->w.ptr, 3, 0, &ft_upkey, settings);
-	mlx_hook(settings->w.ptr, 17, 1L << 17, &ft_destr, settings);
 	mlx_loop_hook(settings->ptr, &ft_loop, settings);
+	if (settings->bmp == 0)
+	{ 
+		mlx_hook(settings->w.ptr, 2, 0, &ft_key, settings);
+		mlx_hook(settings->w.ptr, 3, 0, &ft_upkey, settings);
+		mlx_hook(settings->w.ptr, 17, 1L << 17, &ft_destr, settings);
+	}
 	mlx_loop(settings->ptr);
 }
 

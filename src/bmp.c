@@ -99,5 +99,7 @@ void			ft_bmp(t_all *settings)
 	ft_ppbmp(settings);
 	ft_putdata(settings, fd);
 	close(fd);
+	free(settings->w.iptr);
+	free(settings->w.adr);
 	errors(ft_clear(settings));
 }

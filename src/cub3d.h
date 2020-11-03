@@ -188,8 +188,10 @@ typedef	struct			s_val
 typedef	struct			s_all
 {
 	int					err;
+	int					am;
 	int					bmp;
 	void				*ptr;
+	int					m;
 	t_val				val;
 	t_psp				*psp;
 	t_ds				*ds;
@@ -207,6 +209,10 @@ typedef	struct			s_all
 	t_check				check;
 }						t_all;
 
+int						ose(t_all *settings, int i, int flag);
+void					ft_chspace(t_all *settings);
+int						ft_skipspc(char *line, int i);
+int						ft_ns(t_all *settings);
 void					texture(t_all *settings, int i, char *line);
 void					ft_val(int fd, t_all *settings);
 int						ft_in(t_all *settings);

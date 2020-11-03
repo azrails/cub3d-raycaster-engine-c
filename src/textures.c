@@ -25,7 +25,7 @@ char	*ft_textures(t_all *settings, char *line, int i)
 	char	*path;
 
 	k = 0;
-	i = ft_skiptrash(line, i);
+	i = ft_skipspc(line, i);
 	end = ft_pathlen(line, i);
 	if (!(path = ft_calloc(sizeof(char), (end - i + 1))))
 		return (NULL);
@@ -36,13 +36,20 @@ char	*ft_textures(t_all *settings, char *line, int i)
 		k++;
 	}
 	if ((ft_check_name(path, ".xpm")) < 0)
+	{
+		free(path);
 		return (NULL);
+	}
 	if ((fd = open(path, O_RDONLY)) <= 0)
 	{
+		free(path);
 		settings->err = -8;
 		return (NULL);
 	}
 	close(fd);
+	i = ft_skipspc(line, i);
+	if (line[i] != '\0')
+		return (NULL);
 	return (path);
 }
 
@@ -52,10 +59,12 @@ int		ft_area(char c, char *line, t_all *settings, int i)
 	int count;
 
 	count = 0;
-	while (count < 3)
+	while (count < 3 && line[i])
 	{
 		nbr = 0;
-		i = ft_skiptrash(line, i);
+		i = ft_skipspc(line, i);
+		if (!(ft_isnum(line[i])))
+			return (-12);
 		while (ft_isnum(line[i]))
 		{
 			nbr *= 10;
@@ -63,13 +72,16 @@ int		ft_area(char c, char *line, t_all *settings, int i)
 			i++;
 		}
 		if (nbr > 255 || nbr < 0)
-			nbr = 0;
+			return (-12);
 		if (c == 'F')
 			settings->config.f[count] = nbr;
 		else if (c == 'C')
 			settings->config.c[count] = nbr;
 		count++;
 	}
+	i = ft_skipspc(line, i);
+	if (line[i] != '\0')
+		return (-12);
 	settings->val.cf++;
 	return (0);
 }

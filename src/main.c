@@ -69,7 +69,7 @@ int				main(int argc, char **argv)
 		if (error_arg(argc, argv) == 0)
 		{
 			if ((fd = open(argv[1], O_RDONLY)) < 0)
-				errors(-3);
+				errors(-1);
 			if (argc == 2)
 				ft_init(fd, &settings, 0);
 			else if (argc == 3)

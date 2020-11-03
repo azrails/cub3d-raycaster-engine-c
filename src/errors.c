@@ -12,49 +12,6 @@
 
 #include "cub3d.h"
 
-void	texture(t_all *settings, int i, char *line)
-{
-	if (line[i] == 'N' && line[i + 1] == 'O' && line[i + 2] == ' ')
-		settings->config.n = ft_textures(settings, line, i + 2);
-	if (line[i] == 'S' && line[i + 1] == 'O' && line[i + 2] == ' ')
-		settings->config.s = ft_textures(settings, line, i + 2);
-	if (line[i] == 'W' && line[i + 1] == 'E' && line[i + 2] == ' ')
-		settings->config.w = ft_textures(settings, line, i + 2);
-	if (line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' ')
-		settings->config.e = ft_textures(settings, line, i + 2);
-}
-
-int		ft_destr(void *param)
-{
-	t_all *settings;
-
-	settings = (t_all *)param;
-	errors(ft_clear(settings));
-	return (1);
-}
-
-void	ft_op(t_all *settings, char *tmp, t_psp *psp)
-{
-	int fd;
-
-	if ((ft_check_name(tmp, ".xpm")) < 0)
-		settings->err = -7;
-	if ((fd = open(tmp, O_RDONLY)) <= 0)
-		settings->err = -8;
-	if (settings->err < 0)
-		errors(ft_clear(settings));
-	close(fd);
-	psp->sl = 2;
-	if (!(psp->iptr =
-		mlx_xpm_file_to_image(settings->ptr, tmp, &psp->wd, &psp->hg)))
-	{
-		settings->err = -7;
-		errors(ft_clear(settings));
-	}
-	psp->aptr = mlx_get_data_addr(psp->iptr, &psp->bp, &psp->sl, &psp->end);
-	settings->psp = psp;
-}
-
 int		ft_clear(t_all *settings)
 {
 	if (settings->w.ptr != NULL)
@@ -76,6 +33,12 @@ int		ft_clear(t_all *settings)
 
 void	errors(int er)
 {
+	if (er == -12)
+		write(1, "ERROR: invalid color\n", 21);
+	if (er == -11)
+		write(1, "ERROR: sprite set but not path\n", 31);
+	if (er == -10)
+		write(1, "ERROR: invalid color\n", 21);
 	if (er == -9)
 		write(1, "ERROR: invalid resolution\n", 26);
 	if (er == -8)
@@ -84,8 +47,6 @@ void	errors(int er)
 		write(1, "ERROR: in open textures\n", 24);
 	if (er == -6)
 		write(1, "ERROR:malloc is dead\n", 21);
-	if (er == -5)
-		write(1, "ERROR:raycaster will be strong\n", 32);
 	if (er == -5)
 		write(1, "ERROR: wrong map\n", 17);
 	if (er == -4)

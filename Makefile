@@ -34,7 +34,8 @@ SRC =  src/main.c \
 		src/sprite.c \
 		src/sprite2.c \
 		src/bmp.c \
-		src/otext.c
+		src/otext.c\
+		src/utils.c
 
 O = $(SRC:.c=.o)
 
@@ -45,16 +46,16 @@ MLXFLAG = -lmlx -framework OpenGL -framework AppKit
 all: $(NAME)
 
 %.o: %.c
-	gcc  $(FLAG) -c $< -o $@
+	gcc  $(FLAG) -g -c $< -o $@
 
 $(NAME):$(O)
 		make -C mlx
 		gcc -o $(NAME) -L $(MLX) $(MLXFLAG) $(O)
 clean:
+		make -C mlx clean
 		rm -f $(O)
 
 fclean: clean
-		make -C mlx clean
 		rm -f $(NAME)
 
 re: fclean all

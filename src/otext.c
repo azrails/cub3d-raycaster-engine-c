@@ -27,7 +27,7 @@ void			ft_val(int fd, t_all *settings)
 	}
 	if (settings->val.cf == 0 || settings->val.cf == 1)
 	{
-		settings->err = -9;
+		settings->err = -10;
 		errors(ft_clear(settings));
 	}
 }
@@ -40,12 +40,15 @@ int				ft_opstp(t_all *settings, char *line, int i)
 	t_psp	*psp;
 
 	k = 0;
-	i = ft_skiptrash(line, i);
+	i = ft_skipspc(line, i);
 	end = ft_pathlen(line, i);
 	if (!(psp = malloc(sizeof(t_psp))))
 		return (-6);
 	if (!(tmp = ft_calloc(sizeof(char), (end - i + 1))))
+	{
+		free(psp);
 		return (-6);
+	}
 	while (i <= end)
 	{
 		tmp[k] = line[i];
@@ -55,6 +58,9 @@ int				ft_opstp(t_all *settings, char *line, int i)
 	ft_op(settings, tmp, psp);
 	settings->val.s++;
 	free(tmp);
+	i = ft_skipspc(line, i);
+	if (line[i] != '\0')
+		return(-8);
 	return (0);
 }
 

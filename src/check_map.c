@@ -43,12 +43,12 @@ static	int		checker(t_all *settings, int i, int j)
 		if (!(tr(settings, i, j - 1)) || !(tr(settings, i, j + 1)))
 			return (0);
 		y = ft_strlen(settings->map.lines[i + 1]);
-		if (j < y && (!(tr(settings, i + 1, j - 1))
-		|| !(tr(settings, i + 1, j + 1)) || !(tr(settings, i + 1, j))))
+		if (j > y || (j < y && (!(tr(settings, i + 1, j - 1)
+		|| (j < y && (!(tr(settings, i + 1, j + 1)))) || (j < y &&(!(tr(settings, i + 1, j))))))))
 			return (0);
 		y = ft_strlen(settings->map.lines[i - 1]);
-		if (j < y && (!(tr(settings, i - 1, j - 1))
-		|| !(tr(settings, i - 1, j + 1)) || !(tr(settings, i - 1, j))))
+		if (j > y || (j < y && (!(tr(settings, i - 1, j - 1))
+		|| !(tr(settings, i - 1, j + 1)) || !(tr(settings, i - 1, j)))))
 			return (0);
 	}
 	return (1);
@@ -80,4 +80,31 @@ int				ft_check_lines(t_all *settings)
 		i++;
 	}
 	return (1);
+}
+
+void			ft_chspace(t_all *settings)
+{
+	int i;
+	int	j;
+	int end;
+	int	start;
+	int	x;
+
+	start = 0;
+	i = 0;
+	x = ft_len_map(settings);
+	while(settings->map.lines[i])
+	{
+		j = 0;
+		while(settings->map.lines[i][j])
+		{
+			start = ose(settings, i, 0);
+			end = ose(settings, i, 1);
+			if (settings->map.lines[i][j] == ' ' && j > start && j < end
+				&& i != 0 && i != x)
+				settings->map.lines[i][j] = '1';
+			j++;
+		}
+		i++;
+	}
 }

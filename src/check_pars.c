@@ -78,9 +78,15 @@ static	void	ft_ch(t_all *settings)
 {
 	int d;
 
+	ft_chspace(settings);
 	if (ft_srch_player(settings) != 1)
 	{
 		settings->err = -5;
+		errors(ft_clear(settings));
+	}
+	if (ft_ns(settings) > 0 && settings->val.s == 0)
+	{
+		settings->err = -11;
 		errors(ft_clear(settings));
 	}
 	if ((d = ft_check_lines(settings)) < 0)

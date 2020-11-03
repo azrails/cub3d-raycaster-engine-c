@@ -12,6 +12,24 @@
 
 #include "cub3d.h"
 
+int	ose(t_all *settings, int i, int flag)
+{
+	int	end;
+	int count;
+
+	end = 0;
+	count = 0;
+	while (settings->map.lines[i][end])
+	{
+		if (settings->map.lines[i][end] == '1' && flag == 0)
+			break;
+		if (settings->map.lines[i][end] == '1' && flag == 1)
+			count = end;
+		end++;
+	}
+	return (end);
+}
+
 int	ft_resolution(char *line, t_all *settings, int i)
 {
 	int nbr;
@@ -21,7 +39,7 @@ int	ft_resolution(char *line, t_all *settings, int i)
 	while (count < 2)
 	{
 		nbr = 0;
-		i = ft_skiptrash(line, i);
+		i = ft_skipspc(line, i);
 		while (ft_isnum(line[i]))
 		{
 			nbr *= 10;
@@ -58,5 +76,7 @@ int	ft_pars_map(char *line, t_all *settings)
 	free(settings->map.lines);
 	settings->map.lines = matrix;
 	settings->map.count += 1;
+	settings->m = 1;
+	settings->am = 1;
 	return (0);
 }

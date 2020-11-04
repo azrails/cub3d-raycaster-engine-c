@@ -41,6 +41,12 @@ static	void	init(int fd, t_all *settings)
 
 void			ft_init(int fd, t_all *settings, int f)
 {
+	settings->config.c[0] = -1;
+	settings->config.c[1] = -1;
+	settings->config.c[2] = -1;
+	settings->config.f[0] = -1;
+	settings->config.f[1] = -1;
+	settings->config.f[2] = -1;
 	settings->key.mu = 0;
 	settings->key.mr = 0;
 	settings->key.ml = 0;

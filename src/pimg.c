@@ -128,7 +128,5 @@ int					ft_img(t_all *settings)
 		ft_bmp(settings);
 	mlx_put_image_to_window(settings->ptr, settings->w.ptr,
 	settings->w.iptr, 0, 0);
-	free(settings->w.iptr);
-	free(settings->w.adr);
 	return (0);
 }

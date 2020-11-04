@@ -115,4 +115,11 @@ void			ft_check_pars(t_all *settings)
 		settings->err = -9;
 		errors(ft_clear(settings));
 	}
+	if (settings->config.c[0] == -1 || settings->config.c[1] == -1 ||
+		settings->config.c[2] == -1 || settings->config.f[0] == -1 ||
+		settings->config.f[1] == -1 || settings->config.f[2] == -1)
+	{
+		settings->err = -10;
+		errors(ft_clear(settings));
+	}
 }

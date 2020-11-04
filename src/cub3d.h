@@ -210,6 +210,7 @@ typedef	struct			s_all
 	t_check				check;
 }						t_all;
 
+void					ft_start(int fd, t_all *settings);
 int						ose(t_all *settings, int i, int flag);
 void					ft_chspace(t_all *settings);
 int						ft_skipspc(char *line, int i);

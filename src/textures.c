@@ -61,22 +61,22 @@ char			*ft_textures(t_all *settings, char *line, int i)
 	return (path);
 }
 
-static	int		ch(char *line, int *i, int *nbr)
+static	int		ch(char *line, int i, int *nbr)
 {
-	if (!(ft_isnum(line[*i])))
-		return (0);
-	while (ft_isnum(line[*i]))
+	if (!(ft_isnum(line[i])))
+		return (-12);
+	while (ft_isnum(line[i]))
 	{
 		if (*nbr <= 10000)
 		{
 			*nbr *= 10;
-			*nbr += line[*i] - '0';
+			*nbr += line[i] - '0';
 		}
-		*i++;
+		i++;
 	}
 	if (*nbr > 255 || *nbr < 0)
-		return (0);
-	return (1);
+		return (-12);
+	return (i);
 }
 
 int				ft_area(char c, char *line, t_all *settings, int i)
@@ -91,7 +91,7 @@ int				ft_area(char c, char *line, t_all *settings, int i)
 		if (line[i] == ',')
 			i++;
 		i = ft_skipspc(line, i);
-		if (!(ch(line, &i, &nbr)))
+		if ((i = ch(line, i, &nbr)) == -12)
 			return (-12);
 		if (c == 'F')
 			settings->config.c[count] = nbr;

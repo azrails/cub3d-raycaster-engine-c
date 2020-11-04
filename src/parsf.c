@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static	void	ft_start(int fd, t_all *settings)
+void			ft_start(int fd, t_all *settings)
 {
 	if (!(settings->ptr = mlx_init()))
 	{
@@ -38,7 +38,7 @@ static	void	ft_start(int fd, t_all *settings)
 	mlx_loop(settings->ptr);
 }
 
-static	int		hub(char *line, t_all *settings, int i)
+static	int		fhub(char *line, t_all *settings, int i)
 {
 	if ((line[i] == 'F') && line[i + 1] == ' ' && settings->m == 0)
 	{
@@ -81,7 +81,7 @@ int				ft_hub(char *line, t_all *settings, int i)
 		settings->val.txt++;
 		return (1);
 	}
-	if (hud(line, settings, i))
+	if (fhub(line, settings, i))
 		return (1);
 	return (0);
 }

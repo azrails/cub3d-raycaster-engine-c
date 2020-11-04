@@ -30,17 +30,18 @@ int					ose(t_all *settings, int i, int flag)
 	return (end);
 }
 
-static	void		nbr(int *nbr, int *i, char *line)
+static	int			fnbr(int *nbr, int i, char *line)
 {
-	while (ft_isnum(line[*i]))
+	while (ft_isnum(line[i]))
 	{
 		if (*nbr <= 10000)
 		{
 			*nbr *= 10;
-			*nbr += line[*i] - '0';
+			*nbr += line[i] - '0';
 		}
-		*i++;
+		i++;
 	}
+	return (i);
 }
 
 int					ft_resolution(char *line, t_all *settings, int i)
@@ -53,7 +54,7 @@ int					ft_resolution(char *line, t_all *settings, int i)
 	{
 		nbr = 0;
 		i = ft_skipspc(line, i);
-		nbr(nbr, i, line);
+		i = fnbr(&nbr, i, line);
 		settings->config.res[count] = nbr;
 		count++;
 	}

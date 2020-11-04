@@ -57,17 +57,18 @@ void			ft_init(int fd, t_all *settings, int f)
 	init(fd, settings);
 }
 
-static	void	cycle(int *i, int *end, char *tmp, char *line)
+static	int		cycle(int i, int *end, char *tmp, char *line)
 {
 	int		k;
 
 	k = 0;
-	while (*i <= *end)
+	while (i <= *end)
 	{
-		tmp[k] = line[*i];
-		*i++;
+		tmp[k] = line[i];
+		i++;
 		k++;
 	}
+	return (i);
 }
 
 int				ft_opstp(t_all *settings, char *line, int i)
@@ -85,7 +86,7 @@ int				ft_opstp(t_all *settings, char *line, int i)
 		free(psp);
 		return (-6);
 	}
-	cycle(&i, &end, tmp, line);
+	i = cycle(i, &end, tmp, line);
 	ft_op(settings, tmp, psp);
 	settings->val.s++;
 	free(tmp);

@@ -12,16 +12,34 @@
 
 #include "cub3d.h"
 
-int		ft_isnum(char c)
+int				ft_isnum(char c)
 {
 	return (c <= '9' && c >= '0');
 }
 
-char	*ft_textures(t_all *settings, char *line, int i)
+static	int		che(char *path, t_all *settings)
+{
+	int		fd;
+
+	if ((ft_check_name(path, ".xpm")) < 0)
+	{
+		free(path);
+		return (0);
+	}
+	if ((fd = open(path, O_RDONLY)) <= 0)
+	{
+		free(path);
+		settings->err = -8;
+		return (0);
+	}
+	close(fd);
+	return (1);
+}
+
+char			*ft_textures(t_all *settings, char *line, int i)
 {
 	int		end;
 	int		k;
-	int		fd;
 	char	*path;
 
 	k = 0;
@@ -35,25 +53,33 @@ char	*ft_textures(t_all *settings, char *line, int i)
 		i++;
 		k++;
 	}
-	if ((ft_check_name(path, ".xpm")) < 0)
-	{
-		free(path);
+	if (!(che(path, settings)))
 		return (NULL);
-	}
-	if ((fd = open(path, O_RDONLY)) <= 0)
-	{
-		free(path);
-		settings->err = -8;
-		return (NULL);
-	}
-	close(fd);
 	i = ft_skipspc(line, i);
 	if (line[i] != '\0')
 		return (NULL);
 	return (path);
 }
 
-int		ft_area(char c, char *line, t_all *settings, int i)
+static	int		ch(char *line, int *i, int *nbr)
+{
+	if (!(ft_isnum(line[*i])))
+		return (0);
+	while (ft_isnum(line[*i]))
+	{
+		if (*nbr <= 10000)
+		{
+			*nbr *= 10;
+			*nbr += line[*i] - '0';
+		}
+		*i++;
+	}
+	if (*nbr > 255 || *nbr < 0)
+		return (0);
+	return (1);
+}
+
+int				ft_area(char c, char *line, t_all *settings, int i)
 {
 	int nbr;
 	int count;
@@ -65,18 +91,7 @@ int		ft_area(char c, char *line, t_all *settings, int i)
 		if (line[i] == ',')
 			i++;
 		i = ft_skipspc(line, i);
-		if (!(ft_isnum(line[i])))
-			return (-12);
-		while (ft_isnum(line[i]))
-		{
-			if (nbr <= 10000)
-			{
-				nbr *= 10;
-				nbr += line[i] - '0';
-			}
-			i++;
-		}
-		if (nbr > 255 || nbr < 0)
+		if (!(ch(line, &i, &nbr)))
 			return (-12);
 		if (c == 'F')
 			settings->config.c[count] = nbr;

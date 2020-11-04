@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int	ose(t_all *settings, int i, int flag)
+int					ose(t_all *settings, int i, int flag)
 {
 	int	end;
 	int count;
@@ -22,7 +22,7 @@ int	ose(t_all *settings, int i, int flag)
 	while (settings->map.lines[i][end])
 	{
 		if (settings->map.lines[i][end] == '1' && flag == 0)
-			break;
+			break ;
 		if (settings->map.lines[i][end] == '1' && flag == 1)
 			count = end;
 		end++;
@@ -30,7 +30,20 @@ int	ose(t_all *settings, int i, int flag)
 	return (end);
 }
 
-int	ft_resolution(char *line, t_all *settings, int i)
+static	void		nbr(int *nbr, int *i, char *line)
+{
+	while (ft_isnum(line[*i]))
+	{
+		if (*nbr <= 10000)
+		{
+			*nbr *= 10;
+			*nbr += line[*i] - '0';
+		}
+		*i++;
+	}
+}
+
+int					ft_resolution(char *line, t_all *settings, int i)
 {
 	int nbr;
 	int count;
@@ -40,15 +53,7 @@ int	ft_resolution(char *line, t_all *settings, int i)
 	{
 		nbr = 0;
 		i = ft_skipspc(line, i);
-		while (ft_isnum(line[i]))
-		{
-			if (nbr <= 10000)
-			{
-				nbr *= 10;
-				nbr += line[i] - '0';
-			}
-			i++;
-		}
+		nbr(nbr, i, line);
 		settings->config.res[count] = nbr;
 		count++;
 	}
@@ -63,7 +68,7 @@ int	ft_resolution(char *line, t_all *settings, int i)
 	return (0);
 }
 
-int	ft_pars_map(char *line, t_all *settings)
+int					ft_pars_map(char *line, t_all *settings)
 {
 	char	**matrix;
 	int		it;

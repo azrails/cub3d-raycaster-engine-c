@@ -32,38 +32,6 @@ void			ft_val(int fd, t_all *settings)
 	}
 }
 
-int				ft_opstp(t_all *settings, char *line, int i)
-{
-	int		end;
-	char	*tmp;
-	int		k;
-	t_psp	*psp;
-
-	k = 0;
-	i = ft_skipspc(line, i);
-	end = ft_pathlen(line, i);
-	if (!(psp = malloc(sizeof(t_psp))))
-		return (-6);
-	if (!(tmp = ft_calloc(sizeof(char), (end - i + 1))))
-	{
-		free(psp);
-		return (-6);
-	}
-	while (i <= end)
-	{
-		tmp[k] = line[i];
-		i++;
-		k++;
-	}
-	ft_op(settings, tmp, psp);
-	settings->val.s++;
-	free(tmp);
-	i = ft_skipspc(line, i);
-	if (line[i] != '\0')
-		return(-8);
-	return (0);
-}
-
 int				ft_in(t_all *settings)
 {
 	if (!(settings->w.iptr = mlx_new_image(settings->ptr,
@@ -122,7 +90,7 @@ int				ft_op_textures(t_all *settings)
 		settings->img[i]->hg = 0;
 		i++;
 	}
-	if((settings->err = opt(settings)) < 0)
+	if ((settings->err = opt(settings)) < 0)
 		errors(ft_clear(settings));
 	return (0);
 }

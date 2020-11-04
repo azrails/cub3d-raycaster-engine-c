@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	texture(t_all *settings, int i, char *line)
+void			texture(t_all *settings, int i, char *line)
 {
 	if (line[i] == 'N' && line[i + 1] == 'O' && line[i + 2] == ' ')
 		settings->config.n = ft_textures(settings, line, i + 2);
@@ -24,7 +24,7 @@ void	texture(t_all *settings, int i, char *line)
 		settings->config.e = ft_textures(settings, line, i + 2);
 }
 
-int		ft_destr(void *param)
+int				ft_destr(void *param)
 {
 	t_all *settings;
 
@@ -33,7 +33,7 @@ int		ft_destr(void *param)
 	return (1);
 }
 
-void	ft_op(t_all *settings, char *tmp, t_psp *psp)
+void			ft_op(t_all *settings, char *tmp, t_psp *psp)
 {
 	int fd;
 
@@ -55,32 +55,32 @@ void	ft_op(t_all *settings, char *tmp, t_psp *psp)
 	settings->psp = psp;
 }
 
-int     ft_ns(t_all *settings)
+int				ft_ns(t_all *settings)
 {
-    int i;
-    int j;
-    int c;
+	int i;
+	int j;
+	int c;
 
-    i = 0;
-    c = 0;
-    while (settings->map.lines[i])
-    {
-        j = 0;
-        while (settings->map.lines[i][j])
-        {
-            if (settings->map.lines[i][j] == '2')
-                c++;
-            j++;
-        }
-        i++;
-    }
-    return (c);
+	i = 0;
+	c = 0;
+	while (settings->map.lines[i])
+	{
+		j = 0;
+		while (settings->map.lines[i][j])
+		{
+			if (settings->map.lines[i][j] == '2')
+				c++;
+			j++;
+		}
+		i++;
+	}
+	return (c);
 }
 
-int     ft_skipspc(char *line, int i)
+int				ft_skipspc(char *line, int i)
 {
-    while ((line[i] == '\t' || line[i] == '\n' || line[i] == '\r' ||
-        line[i] == '\v' || line[i] == '\f' || line[i] == ' ') && line[i])
+	while ((line[i] == '\t' || line[i] == '\n' || line[i] == '\r' ||
+		line[i] == '\v' || line[i] == '\f' || line[i] == ' ') && line[i])
 		i++;
 	return (i);
 }

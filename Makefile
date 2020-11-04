@@ -35,7 +35,8 @@ SRC =  src/main.c \
 		src/sprite2.c \
 		src/bmp.c \
 		src/otext.c\
-		src/utils.c
+		src/utils.c \
+		src/coctail.c
 
 O = $(SRC:.c=.o)
 

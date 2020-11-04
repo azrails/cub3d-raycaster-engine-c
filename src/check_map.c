@@ -44,7 +44,8 @@ static	int		checker(t_all *settings, int i, int j)
 			return (0);
 		y = ft_strlen(settings->map.lines[i + 1]);
 		if (j > y || (j < y && (!(tr(settings, i + 1, j - 1)
-		|| (j < y && (!(tr(settings, i + 1, j + 1)))) || (j < y &&(!(tr(settings, i + 1, j))))))))
+		|| (j < y && (!(tr(settings, i + 1, j + 1))))
+		|| (j < y && (!(tr(settings, i + 1, j))))))))
 			return (0);
 		y = ft_strlen(settings->map.lines[i - 1]);
 		if (j > y || (j < y && (!(tr(settings, i - 1, j - 1))
@@ -93,10 +94,10 @@ void			ft_chspace(t_all *settings)
 	start = 0;
 	i = 0;
 	x = ft_len_map(settings);
-	while(settings->map.lines[i])
+	while (settings->map.lines[i])
 	{
 		j = 0;
-		while(settings->map.lines[i][j])
+		while (settings->map.lines[i][j])
 		{
 			start = ose(settings, i, 0);
 			end = ose(settings, i, 1);

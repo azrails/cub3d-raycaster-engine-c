@@ -24,7 +24,7 @@ static	void	ft_putdata(t_all *settings, int fd)
 	}
 }
 
-static	int	ft_put(t_all *settings, int i, int j, int k)
+static	int		ft_put(t_all *settings, int i, int j, int k)
 {
 	char	s;
 	int		r;

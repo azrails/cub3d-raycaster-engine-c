@@ -12,15 +12,6 @@
 
 #include "cub3d.h"
 
-void			start_draw(t_all *settings)
-{
-	if (ft_img(settings) < 0)
-	{
-		settings->err = -3;
-		errors(ft_clear(settings));
-	}
-}
-
 static	void	ft_start(int fd, t_all *settings)
 {
 	if (!(settings->ptr = mlx_init()))
@@ -47,35 +38,24 @@ static	void	ft_start(int fd, t_all *settings)
 	mlx_loop(settings->ptr);
 }
 
-void			ft_init(int fd, t_all *settings, int f)
+static	int		hub(char *line, t_all *settings, int i)
 {
-	settings->img = NULL;
-	settings->ptr = NULL;
-	settings->w.ptr = NULL;
-	settings->w.adr = NULL;
-	settings->w.iptr = NULL;
-	settings->ds = NULL;
-	settings->psp = NULL;
-	settings->key.mu = 0;
-	settings->key.mr = 0;
-	settings->key.ml = 0;
-	settings->key.md = 0;
-	settings->config.res[0] = 0;
-	settings->config.res[1] = 0;
-	settings->config.n = NULL;
-	settings->config.w = NULL;
-	settings->config.s = NULL;
-	settings->config.e = NULL;
-	settings->map.count = 0;
-	settings->map.lines = NULL;
-	settings->position.x = 0;
-	settings->position.y = 0;
-	settings->spt = NULL;
-	settings->bmp = f;
-	settings->err = 0;
-	settings->m = 0;
-	settings->aftm = 0;
-	ft_start(fd, settings);
+	if ((line[i] == 'F') && line[i + 1] == ' ' && settings->m == 0)
+	{
+		settings->err = ft_area('F', line, settings, ++i);
+		return (1);
+	}
+	if ((line[i] == 'C') && line[i + 1] == ' ' && settings->m == 0)
+	{
+		settings->err = ft_area('C', line, settings, ++i);
+		return (1);
+	}
+	if (line[i] == '1' || line[i] == '0' || line[i] == '2')
+	{
+		ft_pars_map(line, settings);
+		return (1);
+	}
+	return (0);
 }
 
 int				ft_hub(char *line, t_all *settings, int i)
@@ -94,27 +74,15 @@ int				ft_hub(char *line, t_all *settings, int i)
 	if (((line[i] == 'N' && line[i + 1] == 'O' && line[i + 2] == ' ') ||
 	(line[i] == 'S' && line[i + 1] == 'O' && line[i + 2] == ' ') ||
 	(line[i] == 'W' && line[i + 1] == 'E' && line[i + 2] == ' ') ||
-	(line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' ')) && settings->m == 0)
+	(line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' ')) &&
+	settings->m == 0)
 	{
 		texture(settings, i, line);
 		settings->val.txt++;
 		return (1);
 	}
-	if ((line[i] == 'F') && line[i + 1] == ' ' && settings->m == 0)
-	{
-		settings->err = ft_area('F', line, settings, ++i);
+	if (hud(line, settings, i))
 		return (1);
-	}
-	if ((line[i] == 'C') && line[i + 1] == ' ' && settings->m == 0)
-	{
-		settings->err = ft_area('C', line, settings, ++i);
-		return (1);
-	}
-	if (line[i] == '1' || line[i] == '0' || line[i] == '2')
-	{
-		ft_pars_map(line, settings);
-		return (1);
-	}
 	return (0);
 }
 
@@ -155,8 +123,8 @@ void			ft_init_conf(int fd, t_all *settings)
 		free(line);
 		line = NULL;
 		if (err == 0)
-			break;
-	}	
+			break ;
+	}
 	err = ft_check(line, settings);
 	free(line);
 	line = NULL;

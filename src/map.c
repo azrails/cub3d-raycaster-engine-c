@@ -42,8 +42,11 @@ int	ft_resolution(char *line, t_all *settings, int i)
 		i = ft_skipspc(line, i);
 		while (ft_isnum(line[i]))
 		{
-			nbr *= 10;
-			nbr += line[i] - '0';
+			if (nbr <= 10000)
+			{
+				nbr *= 10;
+				nbr += line[i] - '0';
+			}
 			i++;
 		}
 		settings->config.res[count] = nbr;
@@ -53,6 +56,9 @@ int	ft_resolution(char *line, t_all *settings, int i)
 		settings->config.res[0] = 1920;
 	if (settings->config.res[1] > 1080)
 		settings->config.res[1] = 1080;
+	i = ft_skipspc(line, i);
+	if (line[i] != '\0')
+		return (-9);
 	settings->val.res++;
 	return (0);
 }

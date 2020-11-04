@@ -34,28 +34,28 @@ int		ft_clear(t_all *settings)
 void	errors(int er)
 {
 	if (er == -12)
-		write(1, "ERROR: invalid color\n", 21);
+		write(1, "ERROR\ninvalid color\n", 20);
 	if (er == -11)
-		write(1, "ERROR: sprite set but not path\n", 31);
+		write(1, "ERROR\nsprite set but not path\n", 30);
 	if (er == -10)
-		write(1, "ERROR: invalid color\n", 21);
+		write(1, "ERROR\ninvalid color\n", 20);
 	if (er == -9)
-		write(1, "ERROR: invalid resolution\n", 26);
+		write(1, "ERROR\ninvalid resolution\n", 25);
 	if (er == -8)
-		write(1, "ERROR: invalid texture path\n", 28);
+		write(1, "ERROR\ninvalid texture path\n", 27);
 	if (er == -7)
-		write(1, "ERROR: in open textures\n", 24);
+		write(1, "ERROR\nin open textures\n", 23);
 	if (er == -6)
-		write(1, "ERROR:malloc is dead\n", 21);
+		write(1, "ERROR\nmalloc is dead\n", 21);
 	if (er == -5)
-		write(1, "ERROR: wrong map\n", 17);
+		write(1, "ERROR\nwrong map\n", 16);
 	if (er == -4)
-		write(2, "ERROR: no map\n", 14);
+		write(2, "ERROR\nno map\n", 13);
 	if (er == -3)
-		write(1, "ERROR:OoOpS\n", 12);
+		write(1, "ERROR\nOoOpS\n", 12);
 	if (er == -2)
-		write(1, "ERROR: no such file or directory\n", 33);
+		write(1, "ERROR\nno such file or directory\n", 32);
 	if (er == -1)
-		write(2, "ERROR: invalid input\n", 21);
+		write(2, "ERROR\ninvalid input\n", 20);
 	exit(0);
 }

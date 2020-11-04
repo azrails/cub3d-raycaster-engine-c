@@ -24,7 +24,7 @@ static	void	ft_putdata(t_all *settings, int fd)
 	}
 }
 
-static	void	ft_put(t_all *settings, int i, int j, int k)
+static	int	ft_put(t_all *settings, int i, int j, int k)
 {
 	char	s;
 	int		r;
@@ -39,6 +39,7 @@ static	void	ft_put(t_all *settings, int i, int j, int k)
 		r--;
 		j += 1;
 	}
+	return (j);
 }
 
 static	void	ft_ppbmp(t_all *settings)
@@ -54,7 +55,7 @@ static	void	ft_ppbmp(t_all *settings)
 		k = settings->dr.sl;
 		while (j < k && j != k)
 		{
-			ft_put(settings, i, j, k);
+			j = ft_put(settings, i, j, k);
 			k -= 4;
 		}
 		i++;

@@ -62,21 +62,27 @@ int		ft_area(char c, char *line, t_all *settings, int i)
 	while (count < 3 && line[i])
 	{
 		nbr = 0;
+		if (line[i] == ',')
+			i++;
 		i = ft_skipspc(line, i);
 		if (!(ft_isnum(line[i])))
 			return (-12);
 		while (ft_isnum(line[i]))
 		{
-			nbr *= 10;
-			nbr += line[i] - '0';
+			if (nbr <= 10000)
+			{
+				nbr *= 10;
+				nbr += line[i] - '0';
+			}
 			i++;
 		}
 		if (nbr > 255 || nbr < 0)
 			return (-12);
 		if (c == 'F')
-			settings->config.f[count] = nbr;
-		else if (c == 'C')
 			settings->config.c[count] = nbr;
+		else if (c == 'C')
+			settings->config.f[count] = nbr;
+		i = ft_skipspc(line, i);
 		count++;
 	}
 	i = ft_skipspc(line, i);

@@ -80,8 +80,7 @@ int     ft_ns(t_all *settings)
 int     ft_skipspc(char *line, int i)
 {
     while ((line[i] == '\t' || line[i] == '\n' || line[i] == '\r' ||
-        line[i] == '\v' || line[i] == '\f' || line[i] == ' ' ||
-        line[i] == ',') && line[i])
+        line[i] == '\v' || line[i] == '\f' || line[i] == ' ') && line[i])
 		i++;
 	return (i);
 }

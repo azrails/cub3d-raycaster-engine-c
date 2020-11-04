@@ -27,7 +27,7 @@ void			ft_val(int fd, t_all *settings)
 	}
 	if (settings->val.cf == 0 || settings->val.cf == 1)
 	{
-		settings->err = -10;
+		settings->err = -12;
 		errors(ft_clear(settings));
 	}
 }

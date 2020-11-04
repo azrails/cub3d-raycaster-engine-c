@@ -190,6 +190,7 @@ typedef	struct			s_all
 	int					err;
 	int					am;
 	int					bmp;
+	int					aftm;
 	void				*ptr;
 	int					m;
 	t_val				val;

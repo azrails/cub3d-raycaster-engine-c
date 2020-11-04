@@ -50,10 +50,14 @@ static	int		error_arg(int argc, char **argv)
 			write(2, "ERROR: wrong file format\n", 25);
 		return (-1);
 	}
-	if (argc == 3 && equal(argv[2], "--save") != 0)
+	if (argc == 3)
 	{
-		write(2, "ERROR: invalid flag\n", 20);
-		return (-1);
+		i = ft_strlen(argv[2]);
+		if (equal(argv[2], "--save") != 0 || i != 6)
+		{
+			write(2, "ERROR: invalid flag\n", 20);
+			return (-1);
+		}
 	}
 	return (0);
 }

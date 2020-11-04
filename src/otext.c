@@ -37,8 +37,9 @@ int				ft_in(t_all *settings)
 	if (!settings->w.iptr && !(settings->w.iptr = mlx_new_image(settings->ptr,
 	settings->config.res[0], settings->config.res[1])))
 		return (-3);
-	if (!settings->w.adr && !(settings->w.adr = mlx_get_data_addr(settings->w.iptr,
-	&settings->dr.bp, &settings->dr.sl, &settings->dr.end)))
+	if (!settings->w.adr && !(settings->w.adr =
+		mlx_get_data_addr(settings->w.iptr, &settings->dr.bp,
+		&settings->dr.sl, &settings->dr.end)))
 		return (-3);
 	if (!(settings->bm.psp = malloc(sizeof(double) * settings->config.res[0])))
 		return (-3);

@@ -1,24 +1,12 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: wsallei <wsallei@student.21-school.ru>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/01 10:35:34 by wsallei           #+#    #+#             */
-/*   Updated: 2020/11/01 10:35:36 by wsallei          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "cub3d.h"
 
 int					ose(t_all *settings, int i, int flag)
 {
 	int	end;
-	int count;
 
+	int count = 0;
 	end = 0;
-	count = 0;
 	while (settings->map.lines[i][end])
 	{
 		if (settings->map.lines[i][end] == '1' && flag == 0)

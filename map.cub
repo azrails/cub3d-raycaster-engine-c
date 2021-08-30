@@ -1,6 +1,4 @@
-
-     SO                        ./textures/south.xpm     
-    C    255 0 0 
+         C    255 0 0 
 
       R  700 700
 
@@ -9,7 +7,7 @@ NO ./textures/north.xpm
 EA ./textures/east.xpm
 
  WE ./textures/west.xpm
-
+SO                        ./textures/south.xpm
 
 
 S ./textures/pillar.xpm 

@@ -1,14 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: wsallei <marvin@42.fr>                     +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/08/20 16:31:53 by wsallei           #+#    #+#              #
-#    Updated: 2020/08/20 16:31:56 by wsallei          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
 .PHONY: all clean fclean re
 
@@ -47,7 +36,7 @@ MLXFLAG = -lmlx -framework OpenGL -framework AppKit
 all: $(NAME)
 
 %.o: %.c
-	gcc  $(FLAG) -g -c $< -o $@
+	gcc  -g -c $< -o $@
 
 $(NAME):$(O)
 		make -C mlx

@@ -1,5 +1,6 @@
 # CUB 3D
 ### :question: This is the raycaster engine (similar to that used in DOOM, Wolfenstein 3D etc.) used pure C, OpenGL, and custom library - mlx for key hooks.
+![alt text](/1.png)
 ### :exclamation: To start, you need to clone the repository and build the project with the command make.
 #### After launch, you need to enter a file with a map in the .cub extension. 
 #### :star: Map file settings:
